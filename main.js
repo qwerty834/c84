@@ -1,67 +1,63 @@
-canvas = document.getElementById("myCanvas")
-can = canvas.getContext("2d");
-img_width = 300;
-img_height = 100;
+can = document.getElementById("can");
+ctx = can.getContext("2d")
+ block_y=1;
+ block_x=1;
 
-var img_image;
+block_image_width = 350;
+block_image_height = 430;
 
-img_x = 100;
-img_y = 100;
-ig_imgTag ="";
-function add() {
-	ig_imgTag = new Image(); //defining a variable with a new image
-	ig_imgTag.onload = uploadimg; // setting a function, onloading this variable
-	ig_imgTag.src = img_image;   // load image
+var block_image_object= "";
+
+function new_image(get_image)
+{
+	// to upload images
 }
 
-function uploadimg() {
-
-	ctx.drawImage(ig_imgTag, img_x, img_y, img_width, img_height);
-}
-
-//Write a code to grab the key-pressed event
+window.addEventListener("keydown", my_keydown());
 
 function my_keydown(e)
 {
-	keyPressed = e.keyCode;
-	console.log(keyPressed);
-	
-	if((keyPressed >=97 && keyPressed<=122)|| (keyPressed >=65 && keyPressed<=90))
-	aplhabetkey();
-	document.getElementById("d1").innerHTML="You pressed an alphabet key";
-	if(keyPressed>= 47 && keyPressed<=57){
-		numberkey();
-		document.getElementById("d1").innerHTML="You have pressed the number key"
+keyPressed = e.keyCode;
+	if(keyPressed == '82'){
+		fabric.Image.fromURL("rr.jpg",function(Img){
+			block_image_object= Img;
+			block_image_object.scaleToWidth(150);
+			block_image_object.scaleToHeight(140);
+			block_image_object.set({
+				top:block_x,
+				left:block_y
+			});
+			canvas.add(block_image_object);
+		}
+	};
+	if(keyPressed == '71'){
+		block_x = 200;
+		block_y = 200;
+		fabric.Image.fromURL("gr.png",function(Img){
+			block_image_object= Img;
+			block_image_object.scaleToWidth(150);
+			block_image_object.scaleToHeight(140);
+			block_image_object.set({
+				top:block_x,
+				left:block_y;
+			});
+			canvas.add(block_image_object);
 	}
-	else{
-		otherkey();
-		document.getElementById("d1").innerHTML="You pressed symbol or other key";
-	}
-}
-
-function aplhabetkey()
-{
-	img_image = "Alpkey.png";
-	add();
-}
-function numberkey()
-{
-	img_image="numkey.png";
-	add();
-}
-function arrowkey()
-{
-	img_image="arrkey.png";
-	add();
-}
-function specialkey()
-{
-	img_image="spkey.png";
-	add();	
-}
-function otherkey()
-{
-	img_image="otherkey.png";
-	add();
-}
 	
+	if(keyPressed == '89')
+	{
+		block_x =350;
+		// upload yellow ranger
+	}
+	if(keyPressed == '80')
+	{
+		block_x = 600;
+		// upload pink ranger
+	}
+	if(keyPressed == '66')
+	{
+		block_x = 700;
+	// upload blue ranger
+	}
+	
+}
